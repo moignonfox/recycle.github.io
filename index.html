@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RECYCLE — La Solution Intelligente pour la Gestion des Déchets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep: #1B6B2F;
+      --green-mid: #2A9D48;
+      --green-bright: #2ECC52;
+      --green-light: #E8F5EC;
+      --dark: #0F1A12;
+      --text: #1A2B1F;
+      --muted: #5A7060;
+      --white: #FFFFFF;
+      --off-white: #F5FAF6;
+      --purple: #7C3AED;
+      --teal: #0891B2;
+      --blue: #2563EB;
+      --border: rgba(27, 107, 47, 0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 5%;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--green-mid), var(--green-bright));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--green-deep);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--green-deep); }
+
+    .btn-nav {
+      background: var(--green-deep);
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+
+    .btn-nav:hover { background: var(--green-mid) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      padding: 120px 5% 80px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(160deg, var(--off-white) 0%, #DCF0E2 60%, #B8E8C4 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(46,204,82,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(27,107,47,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(27,107,47,0.08);
+      border: 1px solid rgba(27,107,47,0.2);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--green-deep);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow span { font-size: 14px; }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 24px;
+    }
+
+    .hero-title .word-gerez { color: var(--green-deep); }
+    .hero-title .word-organisez { color: var(--purple); }
+    .hero-title .word-developpez { color: var(--teal); }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 460px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-deep);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(27,107,47,0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(27,107,47,0.4);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--green-deep);
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 1.5px solid var(--border);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--green-mid);
+      transform: translateY(-2px);
+    }
+
+    /* Hero apps cards */
+    .hero-visual {
+      position: relative;
+      height: 480px;
+    }
+
+    .app-card {
+      position: absolute;
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 200px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .app-card:nth-child(1) { top: 10%; right: 5%; animation-delay: 0s; }
+    .app-card:nth-child(2) { top: 38%; left: 0%; animation-delay: 0.8s; }
+    .app-card:nth-child(3) { bottom: 12%; right: 10%; animation-delay: 1.6s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .app-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .app-icon.purple { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+    .app-icon.teal   { background: linear-gradient(135deg, #0891B2, #06B6D4); }
+    .app-icon.blue   { background: linear-gradient(135deg, #2563EB, #3B82F6); }
+
+    .app-card-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .app-card-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--dark);
+    }
+
+    /* Big truck illustration */
+    .truck-wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 280px;
+      opacity: 0.08;
+    }
+
+    /* STATS BAND */
+    .stats-band {
+      background: var(--dark);
+      padding: 40px 5%;
+    }
+
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--green-bright);
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 4px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* SECTION commons */
+    section { padding: 96px 5%; }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--dark);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 560px;
+      line-height: 1.75;
+    }
+
+    /* APPS SECTION */
+    .apps-section { background: var(--off-white); }
+
+    .apps-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .apps-header .section-desc { margin: 0 auto; }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .app-big-card {
+      background: white;
+      border-radius: 24px;
+      padding: 36px 32px;
+      border: 1px solid var(--border);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .app-big-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 56px rgba(0,0,0,0.1);
+    }
+
+    .app-big-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+
+    .app-big-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .app-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    .badge-purple { background: rgba(124,58,237,0.1); color: var(--purple); }
+    .badge-teal   { background: rgba(8,145,178,0.1); color: var(--teal); }
+    .badge-blue   { background: rgba(37,99,235,0.1); color: var(--blue); }
+
+    .app-big-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .app-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .app-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+
+    .feat-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* HOW IT WORKS */
+    .how-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-top: 40px;
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--green-light);
+      color: var(--green-deep);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .how-visual {
+      background: linear-gradient(160deg, var(--green-deep), #0F3D1C);
+      border-radius: 28px;
+      padding: 48px 40px;
+      color: white;
+    }
+
+    .how-visual-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      opacity: 0.9;
+    }
+
+    .actor-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .actor-row:last-child { border-bottom: none; }
+
+    .actor-emoji {
+      font-size: 24px;
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .actor-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .actor-role {
+      font-size: 0.78rem;
+      opacity: 0.55;
+    }
+
+    /* WHY SECTION */
+    .why-section { background: var(--off-white); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 52px;
+    }
+
+    .why-card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+    }
+
+    .why-icon {
+      font-size: 32px;
+      margin-bottom: 18px;
+    }
+
+    .why-card h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .why-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      background: linear-gradient(135deg, var(--green-deep) 0%, #0C4A1F 100%);
+      padding: 96px 5%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(46,204,82,0.15) 0%, transparent 60%);
+    }
+
+    .cta-section .section-title { color: white; max-width: 600px; margin: 0 auto 20px; }
+    .cta-section .section-desc { color: rgba(255,255,255,0.65); max-width: 480px; margin: 0 auto 40px; }
+
+    .cta-section .btn-primary {
+      background: white;
+      color: var(--green-deep);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+
+    .cta-section .btn-primary:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      padding: 56px 5% 32px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 32px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo .logo-text { color: white; }
+
+    .footer-brand p {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      max-width: 300px;
+    }
+
+    .footer-col h5 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: white;
+      margin-bottom: 16px;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--green-bright); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .footer-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { height: 300px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .apps-grid { grid-template-columns: 1fr; }
+      .how-inner { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">♻️</div>
+    <span class="logo-text">RECYCLE</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#apps">Applications</a></li>
+    <li><a href="#comment">Comment ça marche</a></li>
+    <li><a href="#pourquoi">Pourquoi RECYCLE</a></li>
+    <li><a href="#contact" class="btn-nav">Nous contacter</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span>🌍</span> Togo · Afrique de l'Ouest
+      </div>
+      <h1 class="hero-title">
+        <span class="word-gerez">Gérez.</span><br>
+        <span class="word-organisez">Organisez.</span><br>
+        <span class="word-developpez">Développez.</span><br>
+        <span style="color: var(--dark);">Tout, depuis une seule application.</span>
+      </h1>
+      <p class="hero-subtitle">
+        RECYCLE est la plateforme numérique qui connecte les ménages, les sociétés de collecte et leurs équipes pour digitaliser la gestion des déchets au Togo.
+      </p>
+      <div class="hero-ctas">
+        <a href="#apps" class="btn-primary">♻️ Découvrir les apps</a>
+        <a href="#comment" class="btn-secondary">Comment ça marche →</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <!-- Floating app cards -->
+      <div class="app-card">
+        <div class="app-icon purple">♻️</div>
+        <div>
+          <div class="app-card-label">Pour les abonnés</div>
+          <div class="app-card-name">RECYCLE</div>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon teal">♻️</div>
+        <div>
+          <div class="app-card-label">Pour les employés</div>
+          <div class="app-card-name">RECYCLE E</div>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon blue">♻️</div>
+        <div>
+          <div class="app-card-label">Pour les sociétés</div>
+          <div class="app-card-name">RECYCLE S</div>
+        </div>
+      </div>
+
+      <!-- Background decoration -->
+      <svg class="truck-wrap" viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="60" width="120" height="60" rx="8" fill="#1B6B2F"/>
+        <rect x="140" y="80" width="50" height="40" rx="6" fill="#1B6B2F"/>
+        <circle cx="50" cy="125" r="14" fill="#0F3D1C"/>
+        <circle cx="50" cy="125" r="8" fill="#2ECC52"/>
+        <circle cx="140" cy="125" r="14" fill="#0F3D1C"/>
+        <circle cx="140" cy="125" r="8" fill="#2ECC52"/>
+        <rect x="145" y="88" width="40" height="25" rx="4" fill="#0F3D1C" opacity="0.5"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Applications intégrées</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Acteurs connectés</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Paiements digitaux</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Papier, zéro carnet</div>
+    </div>
+  </div>
+</div>
+
+<!-- APPS SECTION -->
+<section class="apps-section" id="apps">
+  <div class="section-inner">
+    <div class="apps-header">
+      <p class="section-eyebrow">Nos applications</p>
+      <h2 class="section-title">Une suite complète pour tout le réseau</h2>
+      <p class="section-desc">Trois applications conçues pour chaque acteur de la chaîne, entièrement synchronisées.</p>
+    </div>
+
+    <div class="apps-grid">
+      <!-- RECYCLE (abonnés) -->
+      <div class="app-big-card">
+        <div class="app-big-icon" style="background: linear-gradient(135deg, #7C3AED, #A855F7);">♻️</div>
+        <h3>RECYCLE</h3>
+        <span class="app-badge badge-purple">Pour les abonnés</span>
+        <p>L'application citoyenne. Les ménages gèrent leur abonnement, paient, consultent leur historique et vérifient l'identité de leur collecteur en toute sécurité.</p>
+        <ul class="app-features">
+          <li><span class="feat-dot" style="background: var(--purple)"></span>Souscription &amp; paiement en ligne</li>
+          <li><span class="feat-dot" style="background: var(--purple)"></span>Historique des collectes</li>
+          <li><span class="feat-dot" style="background: var(--purple)"></span>Vérification du collecteur</li>
+          <li><span class="feat-dot" style="background: var(--purple)"></span>Notifications &amp; alertes</li>
+          <li><span class="feat-dot" style="background: var(--purple)"></span>Signalement d'incidents</li>
+        </ul>
+      </div>
+
+      <!-- RECYCLE E (employés) -->
+      <div class="app-big-card">
+        <div class="app-big-icon" style="background: linear-gradient(135deg, #0891B2, #06B6D4);">♻️</div>
+        <h3>RECYCLE E</h3>
+        <span class="app-badge badge-teal">Pour les employés</span>
+        <p>L'outil terrain. Collecteurs et éboueurs gèrent leurs tournées, valident les paiements, signalent des incidents et assurent le suivi logistique quotidien.</p>
+        <ul class="app-features">
+          <li><span class="feat-dot" style="background: var(--teal)"></span>Gestion des tournées</li>
+          <li><span class="feat-dot" style="background: var(--teal)"></span>Collecte &amp; validation de paiement</li>
+          <li><span class="feat-dot" style="background: var(--teal)"></span>Rapport d'incidents terrain</li>
+          <li><span class="feat-dot" style="background: var(--teal)"></span>Suivi logistique</li>
+          <li><span class="feat-dot" style="background: var(--teal)"></span>Relance des abonnés</li>
+        </ul>
+      </div>
+
+      <!-- RECYCLE S (sociétés) -->
+      <div class="app-big-card">
+        <div class="app-big-icon" style="background: linear-gradient(135deg, #2563EB, #3B82F6);">♻️</div>
+        <h3>RECYCLE S</h3>
+        <span class="app-badge badge-blue">Pour les sociétés</span>
+        <p>Le back-office des entreprises de collecte. Gérez vos abonnés, suivez vos paiements, supervisez vos équipes et pilotez votre activité depuis un tableau de bord complet.</p>
+        <ul class="app-features">
+          <li><span class="feat-dot" style="background: var(--blue)"></span>Gestion des abonnés &amp; zones</li>
+          <li><span class="feat-dot" style="background: var(--blue)"></span>Suivi financier &amp; recouvrement</li>
+          <li><span class="feat-dot" style="background: var(--blue)"></span>Gestion des équipes terrain</li>
+          <li><span class="feat-dot" style="background: var(--blue)"></span>Statistiques &amp; performances</li>
+          <li><span class="feat-dot" style="background: var(--blue)"></span>Tableau de bord temps réel</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="comment">
+  <div class="section-inner">
+    <div class="how-inner">
+      <div>
+        <p class="section-eyebrow">Comment ça marche</p>
+        <h2 class="section-title">Du contrat au terrain, tout est digital</h2>
+        <p class="section-desc">RECYCLE remplace les carnets, les reçus papier et les espèces par un système centralisé, transparent et traçable.</p>
+
+        <div class="steps-list">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <h4>Le ménage s'abonne</h4>
+              <p>Il choisit sa société de collecte et souscrit directement depuis l'application en quelques secondes.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <h4>Le collecteur passe</h4>
+              <p>L'éboueur suit son itinéraire de tournée et valide chaque collecte sur son téléphone.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <h4>Le paiement est centralisé</h4>
+              <p>L'abonné paie via l'application. La société suit tout en temps réel, sans manipulation d'espèces.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div>
+              <h4>Le responsable pilote</h4>
+              <p>Tableaux de bord, statistiques, alertes : la direction a une vision complète et immédiate de son activité.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-visual">
+        <div class="how-visual-title">Les acteurs connectés</div>
+        <div class="actor-row">
+          <div class="actor-emoji">🏠</div>
+          <div>
+            <div class="actor-name">Les ménages</div>
+            <div class="actor-role">Abonnés · Paiements · Suivi</div>
+          </div>
+        </div>
+        <div class="actor-row">
+          <div class="actor-emoji">🏢</div>
+          <div>
+            <div class="actor-name">Sociétés de collecte</div>
+            <div class="actor-role">Gestion · Finance · Performance</div>
+          </div>
+        </div>
+        <div class="actor-row">
+          <div class="actor-emoji">💼</div>
+          <div>
+            <div class="actor-name">Agents de recouvrement</div>
+            <div class="actor-role">Collecte · Relances · Validation</div>
+          </div>
+        </div>
+        <div class="actor-row">
+          <div class="actor-emoji">🚛</div>
+          <div>
+            <div class="actor-name">Éboueurs</div>
+            <div class="actor-role">Tournées · Incidents · Logistique</div>
+          </div>
+        </div>
+        <div class="actor-row">
+          <div class="actor-emoji">🔐</div>
+          <div>
+            <div class="actor-name">Administrateurs</div>
+            <div class="actor-role">Supervision · KPIs · Conformité</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY RECYCLE -->
+<section class="why-section" id="pourquoi">
+  <div class="section-inner">
+    <p class="section-eyebrow">Pourquoi RECYCLE</p>
+    <h2 class="section-title">Le problème que nous résolvons</h2>
+    <p class="section-desc">Dans de nombreuses villes africaines, la gestion des déchets reste manuelle, opaque et difficile à suivre. RECYCLE change ça.</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">📋</div>
+        <h4>Fini les carnets papier</h4>
+        <p>Chaque abonnement, paiement et collecte est enregistré numériquement. Plus de données perdues, tout est traçable.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💸</div>
+        <h4>Paiements centralisés</h4>
+        <p>Les abonnés paient depuis leur téléphone. Les sociétés reçoivent leurs fonds sans manipulation d'espèces ni risque de fraude.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔍</div>
+        <h4>Collecteurs vérifiés</h4>
+        <p>Les ménages peuvent vérifier l'identité d'un agent de recouvrement directement dans l'application pour leur sécurité.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📍</div>
+        <h4>Tournées optimisées</h4>
+        <p>Les éboueurs disposent de leurs itinéraires et valident les collectes en temps réel. La logistique devient simple et efficace.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📊</div>
+        <h4>Données exploitables</h4>
+        <p>Les responsables accèdent à des tableaux de bord précis pour prendre de meilleures décisions et développer leur activité.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🌍</div>
+        <h4>Impact urbain réel</h4>
+        <p>En digitalisant toute la chaîne, RECYCLE contribue à améliorer la salubrité et la qualité de vie dans les villes du Togo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="section-inner" style="position: relative; z-index: 1;">
+    <h2 class="section-title">Ensemble pour une ville plus propre</h2>
+    <p class="section-desc">Vous êtes une société de collecte ? Rejoignez RECYCLE et modernisez votre activité dès aujourd'hui.</p>
+    <a href="mailto:contact@recycle.tg" class="btn-primary" style="margin: 0 auto; display: inline-flex;">
+      ✉️ Contactez-nous
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-icon">♻️</div>
+          <span class="logo-text">RECYCLE</span>
+        </div>
+        <p>La solution intelligente pour les sociétés de ménage modernes au Togo. Gérez, organisez et développez votre activité depuis une seule plateforme.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Applications</h5>
+        <ul class="footer-links">
+          <li><a href="#">RECYCLE — Abonnés</a></li>
+          <li><a href="#">RECYCLE E — Employés</a></li>
+          <li><a href="#">RECYCLE S — Sociétés</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul class="footer-links">
+          <li><a href="mailto:contact@recycle.tg">contact@recycle.tg</a></li>
+          <li><a href="#">Lomé, Togo</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+          <li><a href="#">Conditions d'utilisation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 RECYCLE. Tous droits réservés.</span>
+      <span class="footer-badge">🌍 Conçu au Togo, pour l'Afrique</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
